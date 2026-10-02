@@ -1,0 +1,805 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/interactive-project/events/blob/main/schemas/event.v1.schema.json",
+  "title": "Typed activity events v1",
+  "allOf": [
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.created"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "engineId": {
+                  "type": "string",
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9._-]*$"
+                },
+                "engineStateVersion": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+                }
+              },
+              "required": [
+                "engineId",
+                "engineStateVersion"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.started"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "revision"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.resumed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "snapshotVersion": {
+                  "const": "1.0.0"
+                }
+              },
+              "required": [
+                "revision",
+                "snapshotVersion"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.interacted"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "actionId": {
+                  "type": "string",
+                  "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                },
+                "actionType": {
+                  "type": "string",
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9._-]*$"
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "actionId",
+                "actionType",
+                "revision"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.completed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "oneOf": [
+                    {
+                      "$ref": "https://github.com/interactive-project/protocol/blob/main/schemas/interoperability.v1.schema.json#/$defs/completed"
+                    },
+                    {
+                      "$ref": "https://github.com/interactive-project/protocol/blob/main/schemas/interoperability.v1.schema.json#/$defs/unevaluable"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/activity.failed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9._-]*$"
+                },
+                "phase": {
+                  "enum": [
+                    "initialization",
+                    "dispatch",
+                    "evaluation",
+                    "restore"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "code",
+                "phase",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/attempt.started"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "attemptId": {
+              "type": "string",
+              "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "attemptId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/attempt.submitted"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "attemptId": {
+              "type": "string",
+              "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "attemptId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/answer.changed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "answerId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "answerId",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "attemptId": {
+              "type": "string",
+              "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "attemptId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/answer.submitted"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "answerId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "answerId",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "attemptId": {
+              "type": "string",
+              "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "attemptId"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/hint.requested"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "hintId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "hintId",
+                "revision"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "type",
+            "payload"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/code.executed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "executionId": {
+                  "type": "string",
+                  "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                },
+                "status": {
+                  "enum": [
+                    "completed",
+                    "failed",
+                    "timeout",
+                    "cancelled"
+                  ]
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "executionId",
+                "status",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/code"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/diagram.nodeCreated"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "nodeId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "nodeId",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/diagram"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/whiteboard.objectCreated"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "objectId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "objectId",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/whiteboard"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/simulation.started"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "tick": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "tick",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/simulation"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/simulation.paused"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "tick": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "tick",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/simulation"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/simulation.resumed"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "tick": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "tick",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/simulation"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/simulation.stopped"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "tick": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "tick",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/simulation"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "interactive-project/simulation.parameterChanged"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "parameterId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "parameterId",
+                "revision"
+              ],
+              "additionalProperties": false
+            },
+            "activityType": {
+              "const": "interactive-project/simulation"
+            }
+          },
+          "required": [
+            "type",
+            "payload",
+            "activityType"
+          ]
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "envelope": {
+      "type": "object",
+      "properties": {
+        "protocolVersion": {
+          "const": "1.0.0"
+        },
+        "eventVersion": {
+          "const": "1.0.0"
+        },
+        "id": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "type": {
+          "enum": [
+            "interactive-project/activity.created",
+            "interactive-project/activity.started",
+            "interactive-project/activity.resumed",
+            "interactive-project/activity.interacted",
+            "interactive-project/activity.completed",
+            "interactive-project/activity.failed",
+            "interactive-project/attempt.started",
+            "interactive-project/attempt.submitted",
+            "interactive-project/answer.changed",
+            "interactive-project/answer.submitted",
+            "interactive-project/hint.requested",
+            "interactive-project/code.executed",
+            "interactive-project/diagram.nodeCreated",
+            "interactive-project/whiteboard.objectCreated",
+            "interactive-project/simulation.started",
+            "interactive-project/simulation.paused",
+            "interactive-project/simulation.resumed",
+            "interactive-project/simulation.stopped",
+            "interactive-project/simulation.parameterChanged"
+          ]
+        },
+        "activityId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "activityType": {
+          "type": "string",
+          "enum": [
+            "interactive-project/quiz",
+            "interactive-project/flashcards",
+            "interactive-project/code",
+            "interactive-project/simulation",
+            "interactive-project/diagram",
+            "interactive-project/whiteboard"
+          ]
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "attemptId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "timestamp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Unix epoch milliseconds captured by the host; not a globally ordered clock."
+        },
+        "causationEventId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "causationActionId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Stable lowercase UUIDv4 identifying the logical activity.",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "payload": {
+          "type": "object"
+        },
+        "extensions": {
+          "type": "object",
+          "description": "Optional namespaced extension values. Unknown extensions are ignored semantically and preserved.",
+          "propertyNames": {
+            "pattern": "^[a-z0-9][a-z0-9-]*(?:\\.[a-z0-9][a-z0-9-]*)+/[a-z0-9][a-z0-9._-]*$"
+          },
+          "additionalProperties": {
+            "$ref": "https://github.com/interactive-project/protocol/blob/main/schemas/activity-spec.v1.schema.json#/$defs/jsonValue"
+          }
+        }
+      },
+      "required": [
+        "protocolVersion",
+        "eventVersion",
+        "id",
+        "type",
+        "activityId",
+        "activityType",
+        "sessionId",
+        "sourceId",
+        "sequence",
+        "timestamp",
+        "payload"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

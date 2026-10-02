@@ -1,0 +1,177 @@
+{
+  "catalogVersion": "1.0.0",
+  "eventVersion": "1.0.0",
+  "timestampUnit": "unix-milliseconds",
+  "events": [
+    {
+      "type": "interactive-project/activity.created",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "engineId",
+        "engineStateVersion"
+      ]
+    },
+    {
+      "type": "interactive-project/activity.started",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/activity.resumed",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "revision",
+        "snapshotVersion"
+      ]
+    },
+    {
+      "type": "interactive-project/activity.interacted",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "actionId",
+        "actionType",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/activity.completed",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "result"
+      ]
+    },
+    {
+      "type": "interactive-project/activity.failed",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "code",
+        "phase",
+        "message"
+      ]
+    },
+    {
+      "type": "interactive-project/attempt.started",
+      "requiresAttempt": true,
+      "activityType": null,
+      "payloadFields": [
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/attempt.submitted",
+      "requiresAttempt": true,
+      "activityType": null,
+      "payloadFields": [
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/answer.changed",
+      "requiresAttempt": true,
+      "activityType": null,
+      "payloadFields": [
+        "answerId",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/answer.submitted",
+      "requiresAttempt": true,
+      "activityType": null,
+      "payloadFields": [
+        "answerId",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/hint.requested",
+      "requiresAttempt": false,
+      "activityType": null,
+      "payloadFields": [
+        "hintId",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/code.executed",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/code",
+      "payloadFields": [
+        "executionId",
+        "status",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/diagram.nodeCreated",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/diagram",
+      "payloadFields": [
+        "nodeId",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/whiteboard.objectCreated",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/whiteboard",
+      "payloadFields": [
+        "objectId",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/simulation.started",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/simulation",
+      "payloadFields": [
+        "tick",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/simulation.paused",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/simulation",
+      "payloadFields": [
+        "tick",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/simulation.resumed",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/simulation",
+      "payloadFields": [
+        "tick",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/simulation.stopped",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/simulation",
+      "payloadFields": [
+        "tick",
+        "revision"
+      ]
+    },
+    {
+      "type": "interactive-project/simulation.parameterChanged",
+      "requiresAttempt": false,
+      "activityType": "interactive-project/simulation",
+      "payloadFields": [
+        "parameterId",
+        "revision"
+      ]
+    }
+  ]
+}

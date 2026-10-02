@@ -1,0 +1,147 @@
+[
+  {
+    "file": "valid/activity.created.json",
+    "valid": true
+  },
+  {
+    "file": "valid/activity.started.json",
+    "valid": true
+  },
+  {
+    "file": "valid/activity.resumed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/activity.interacted.json",
+    "valid": true
+  },
+  {
+    "file": "valid/activity.completed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/activity.failed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/attempt.started.json",
+    "valid": true
+  },
+  {
+    "file": "valid/attempt.submitted.json",
+    "valid": true
+  },
+  {
+    "file": "valid/answer.changed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/answer.submitted.json",
+    "valid": true
+  },
+  {
+    "file": "valid/hint.requested.json",
+    "valid": true
+  },
+  {
+    "file": "valid/code.executed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/diagram.nodeCreated.json",
+    "valid": true
+  },
+  {
+    "file": "valid/whiteboard.objectCreated.json",
+    "valid": true
+  },
+  {
+    "file": "valid/simulation.started.json",
+    "valid": true
+  },
+  {
+    "file": "valid/simulation.paused.json",
+    "valid": true
+  },
+  {
+    "file": "valid/simulation.resumed.json",
+    "valid": true
+  },
+  {
+    "file": "valid/simulation.stopped.json",
+    "valid": true
+  },
+  {
+    "file": "valid/simulation.parameterChanged.json",
+    "valid": true
+  },
+  {
+    "file": "valid/whiteboard-completed.json",
+    "valid": true
+  },
+  {
+    "file": "invalid/bad-id.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/bad-version.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/unknown-type.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/missing-attempt.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/fractional-time.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/negative-sequence.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/wrong-domain.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/raw-answer.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/raw-code.json",
+    "valid": false,
+    "structural": true
+  },
+  {
+    "file": "invalid/self-causation.json",
+    "valid": false,
+    "structural": false
+  },
+  {
+    "file": "invalid/result-identity.json",
+    "valid": false,
+    "structural": false
+  },
+  {
+    "file": "invalid/interaction-causation.json",
+    "valid": false,
+    "structural": false
+  },
+  {
+    "file": "invalid/pending-completion.json",
+    "valid": false,
+    "structural": true
+  }
+]
