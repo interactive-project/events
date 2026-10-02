@@ -3,7 +3,7 @@ import addFormats from 'ajv-formats';
 import {readFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import {copyGeneratedJson} from '@interactive-project/protocol/generation/json';
-const require=createRequire(import.meta.url),ajv=new Ajv2020({strict:true,allErrors:true,ownProperties:true});addFormats(ajv);
+const require=createRequire(import.meta.url),ajv=new Ajv2020({strict:true,allowUnionTypes:true,allErrors:true,ownProperties:true});addFormats(ajv);
 for(const name of ['activity-spec','interoperability'])ajv.addSchema(JSON.parse(readFileSync(require.resolve('@interactive-project/protocol/schemas/'+name+'.v1.schema.json'))));
 const schema=JSON.parse(readFileSync(new URL('../schemas/event.v1.schema.json',import.meta.url))),validate=ajv.compile(schema);
 const escape=text=>text.replace(/~/g,'~0').replace(/\//g,'~1'),diag=(code,path,message)=>({code,path,severity:'error',message});

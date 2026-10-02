@@ -7,7 +7,7 @@ import {validateEvent} from '../validation/index.js';
 import {eventTypes,eventVersion,timestampUnit} from '../index.js';
 const require=createRequire(import.meta.url),read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 const spec=JSON.parse(readFileSync(require.resolve('@interactive-project/protocol/schemas/activity-spec.v1.schema.json'))),interop=JSON.parse(readFileSync(require.resolve('@interactive-project/protocol/schemas/interoperability.v1.schema.json'))),schema=read('../schemas/event.v1.schema.json');
-const ajv=new Ajv2020({strict:true,allErrors:true});addFormats(ajv);ajv.addSchema(spec);ajv.addSchema(interop);const structural=ajv.compile(schema),manifest=read('../fixtures/conformance.json');
+const ajv=new Ajv2020({strict:true,allowUnionTypes:true,allErrors:true});addFormats(ajv);ajv.addSchema(spec);ajv.addSchema(interop);const structural=ajv.compile(schema),manifest=read('../fixtures/conformance.json');
 for(const entry of manifest){
  const event=read('../fixtures/'+entry.file),before=JSON.stringify(event),result=validateEvent(event);
  assert.equal(result.valid,entry.valid,entry.file);assert.equal(JSON.stringify(event),before);
@@ -29,7 +29,7 @@ const badIdentity=read('../fixtures/invalid/result-identity.json');assert.equal(
 const ts=(await import('typescript')).default,program=ts.createProgram([new URL('./type-consumer.mts',import.meta.url).pathname],{strict:true,noEmit:true,module:ts.ModuleKind.NodeNext,moduleResolution:ts.ModuleResolutionKind.NodeNext,lib:['lib.es2022.d.ts']});
 const diagnostics=ts.getPreEmitDiagnostics(program);assert.equal(diagnostics.length,0,diagnostics.map(d=>ts.flattenDiagnosticMessageText(d.messageText,'\n')).join('\n'));
 const checker=program.getTypeChecker(),source=program.getSourceFiles().find(s=>s.fileName.endsWith('/types/events.d.ts')),declarations=new Map(source.statements.filter(s=>s.name).map(s=>[s.name.text,s]));
-function resolve(shape,root){if(!shape.$ref)return[shape,root];const ref=shape.$ref;root=ref.startsWith('#')?root:ref.startsWith(spec.$id)?spec:interop;const pointer=ref.split('#')[1].split('/').slice(1);for(const key of pointer)root=root;let value=root;for(const key of pointer)value=value[key];return[value,root];}
+function resolve(shape,root){if(!shape.$ref)return[shape,root];const ref=shape.$ref;root=ref.startsWith('#')?root:ref.startsWith(spec.$id)?spec:interop;const pointer=ref.split('#')[1].split('/').slice(1);let value=root;for(const key of pointer)value=value[key];return[value,root];}
 function compare(type,shape,root=schema){
  [shape,root]=resolve(shape,root);
  if(shape.oneOf){assert(type.isUnion());assert.equal(type.types.length,shape.oneOf.length);for(const member of type.types){const status=checker.getPropertyOfType(member,'status');const literal=checker.getTypeOfSymbolAtLocation(status,source).value;const candidate=shape.oneOf.find(s=>resolve(s,root)[0].properties.status.const===literal);assert(candidate);compare(member,candidate,root);}return;}
