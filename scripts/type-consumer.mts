@@ -9,3 +9,14 @@ const payload:EventPayloads['interactive-project/code.executed']={executionId:'f
 // @ts-expect-error Raw source is not in the default event catalog.
 const invalid:EventPayloads['interactive-project/code.executed']={...payload,source:'private'};
 void invalid;void observe;void eventTypes;void validateEvent;
+
+import {createEventBus,type Frozen} from '@interactive-project/events/bus';
+const bus=createEventBus({activityId:'fixture',sessionId:'fixture',sourceId:'fixture',validate:()=>({valid:true})});
+bus.subscribe(event=>{
+ if(event.type==='interactive-project/activity.started'){
+  const revision:number=event.payload.revision;void revision;
+  // @ts-expect-error Observer data is deeply readonly.
+  event.payload.revision=3;
+ }
+});
+const frozen:Frozen<ActivityEvent>|undefined=undefined;void frozen;

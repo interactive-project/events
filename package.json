@@ -12,7 +12,8 @@
     "catalogs",
     "docs",
     "fixtures",
-    "README.md"
+    "README.md",
+    "bus"
   ],
   "exports": {
     ".": {
@@ -26,10 +27,15 @@
       "default": "./validation/index.js"
     },
     "./schemas/event.v1.schema.json": "./schemas/event.v1.schema.json",
-    "./catalogs/events.v1.json": "./catalogs/events.v1.json"
+    "./catalogs/events.v1.json": "./catalogs/events.v1.json",
+    "./bus": {
+      "types": "./bus/index.d.ts",
+      "import": "./bus/index.js",
+      "default": "./bus/index.js"
+    }
   },
   "scripts": {
-    "test": "node scripts/check-conformance.mjs && python3 scripts/check_conformance.py"
+    "test": "node scripts/check-conformance.mjs && python3 scripts/check_conformance.py && node scripts/check-bus.mjs"
   },
   "peerDependencies": {
     "@interactive-project/protocol": "0.1.0",
