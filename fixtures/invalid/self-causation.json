@@ -11,5 +11,6 @@
   "payload": {
     "revision": 0
   },
-  "causationEventId": "00000000-0000-4000-8000-000000000101"
+  "causationEventId": "00000000-0000-4000-8000-000000000101",
+  "type": "interactive-project/activity.started"
 }

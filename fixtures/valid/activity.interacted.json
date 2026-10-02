@@ -12,5 +12,6 @@
     "actionId": "00000000-0000-4000-8000-000000000005",
     "actionType": "interactive-project/answer.change",
     "revision": 0
-  }
+  },
+  "type": "interactive-project/activity.interacted"
 }

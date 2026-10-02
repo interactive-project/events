@@ -11,5 +11,6 @@
   "attemptId": "00000000-0000-4000-8000-000000000006",
   "payload": {
     "revision": 0
-  }
+  },
+  "type": "interactive-project/attempt.started"
 }

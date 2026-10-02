@@ -13,5 +13,6 @@
     "status": "completed",
     "revision": 0,
     "source": "private code"
-  }
+  },
+  "type": "interactive-project/code.executed"
 }

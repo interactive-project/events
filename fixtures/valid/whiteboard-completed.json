@@ -19,5 +19,6 @@
       "status": "unevaluable",
       "reason": "unassessed"
     }
-  }
+  },
+  "type": "interactive-project/activity.completed"
 }

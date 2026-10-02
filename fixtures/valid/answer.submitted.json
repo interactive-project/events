@@ -12,5 +12,6 @@
   "payload": {
     "answerId": "fixture-item",
     "revision": 0
-  }
+  },
+  "type": "interactive-project/answer.submitted"
 }

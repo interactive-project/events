@@ -11,5 +11,6 @@
   "payload": {
     "hintId": "fixture-item",
     "revision": 0
-  }
+  },
+  "type": "interactive-project/hint.requested"
 }

@@ -13,5 +13,6 @@
     "answerId": "fixture-item",
     "revision": 0,
     "answer": "private answer"
-  }
+  },
+  "type": "interactive-project/answer.changed"
 }

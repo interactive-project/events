@@ -12,5 +12,6 @@
     "code": "interactive-project/evaluation-failure",
     "phase": "evaluation",
     "message": "The operation failed."
-  }
+  },
+  "type": "interactive-project/activity.failed"
 }

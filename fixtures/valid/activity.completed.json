@@ -22,5 +22,6 @@
         "scale": "normalized"
       }
     }
-  }
+  },
+  "type": "interactive-project/activity.completed"
 }

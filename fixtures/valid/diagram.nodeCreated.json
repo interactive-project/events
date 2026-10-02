@@ -11,5 +11,6 @@
   "payload": {
     "nodeId": "fixture-item",
     "revision": 0
-  }
+  },
+  "type": "interactive-project/diagram.nodeCreated"
 }

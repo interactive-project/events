@@ -11,5 +11,6 @@
   "payload": {
     "tick": 0,
     "revision": 0
-  }
+  },
+  "type": "interactive-project/simulation.started"
 }

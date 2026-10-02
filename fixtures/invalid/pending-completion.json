@@ -19,5 +19,6 @@
       "status": "pending",
       "pendingReason": "effects"
     }
-  }
+  },
+  "type": "interactive-project/activity.completed"
 }

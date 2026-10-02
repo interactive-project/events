@@ -10,5 +10,6 @@
   "timestamp": 1.25,
   "payload": {
     "revision": 0
-  }
+  },
+  "type": "interactive-project/activity.started"
 }

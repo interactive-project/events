@@ -11,5 +11,6 @@
   "payload": {
     "objectId": "fixture-item",
     "revision": 0
-  }
+  },
+  "type": "interactive-project/whiteboard.objectCreated"
 }

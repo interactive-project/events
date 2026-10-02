@@ -10,7 +10,7 @@ const spec=JSON.parse(readFileSync(require.resolve('@interactive-project/protoco
 const ajv=new Ajv2020({strict:true,allowUnionTypes:true,allErrors:true});addFormats(ajv);ajv.addSchema(spec);ajv.addSchema(interop);const structural=ajv.compile(schema),manifest=read('../fixtures/conformance.json');
 for(const entry of manifest){
  const event=read('../fixtures/'+entry.file),before=JSON.stringify(event),result=validateEvent(event);
- assert.equal(result.valid,entry.valid,entry.file);assert.equal(JSON.stringify(event),before);
+ assert.equal(result.valid,entry.valid,entry.file+': '+JSON.stringify(result.diagnostics));assert.equal(JSON.stringify(event),before);
  assert.equal(structural(event),entry.valid||entry.structural===false,entry.file+': structure');
  if(entry.valid)assert.deepEqual(JSON.parse(JSON.stringify(event)),event);
 }
