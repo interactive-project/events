@@ -1,0 +1,14 @@
+{
+  "protocolVersion": "1.0.0",
+  "eventVersion": "1.0.0",
+  "id": "not-a-uuid",
+  "activityId": "00000000-0000-4000-8000-000000000002",
+  "activityType": "interactive-project/quiz",
+  "sessionId": "00000000-0000-4000-8000-000000000003",
+  "sourceId": "00000000-0000-4000-8000-000000000004",
+  "sequence": 1,
+  "timestamp": 1790910000000,
+  "payload": {
+    "revision": 0
+  }
+}

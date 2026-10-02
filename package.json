@@ -1,0 +1,53 @@
+{
+  "name": "@interactive-project/events",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Portable typed activity event catalog and versioned event schema",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "types",
+    "validation",
+    "schemas",
+    "catalogs",
+    "docs",
+    "fixtures",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    },
+    "./validation": {
+      "types": "./validation/index.d.ts",
+      "import": "./validation/index.js",
+      "default": "./validation/index.js"
+    },
+    "./schemas/event.v1.schema.json": "./schemas/event.v1.schema.json",
+    "./catalogs/events.v1.json": "./catalogs/events.v1.json"
+  },
+  "scripts": {
+    "test": "node scripts/check-conformance.mjs && python3 scripts/check_conformance.py"
+  },
+  "peerDependencies": {
+    "@interactive-project/protocol": "0.1.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "peerDependenciesMeta": {
+    "ajv": {
+      "optional": true
+    },
+    "ajv-formats": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@interactive-project/protocol": "git+https://github.com/interactive-project/protocol.git#0280e004ba863621a257b96819f34295c8db0ea7",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "typescript": "^5.9.3"
+  }
+}
