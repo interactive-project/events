@@ -13,7 +13,8 @@
     "docs",
     "fixtures",
     "README.md",
-    "bus"
+    "bus",
+    "telemetry"
   ],
   "exports": {
     ".": {
@@ -32,10 +33,15 @@
       "types": "./bus/index.d.ts",
       "import": "./bus/index.js",
       "default": "./bus/index.js"
+    },
+    "./telemetry": {
+      "types": "./telemetry/index.d.ts",
+      "import": "./telemetry/index.js",
+      "default": "./telemetry/index.js"
     }
   },
   "scripts": {
-    "test": "node scripts/check-conformance.mjs && python3 scripts/check_conformance.py && node scripts/check-bus.mjs"
+    "test": "node scripts/check-conformance.mjs && python3 scripts/check_conformance.py && node scripts/check-bus.mjs && node scripts/check-telemetry.mjs"
   },
   "peerDependencies": {
     "@interactive-project/protocol": "0.1.0",
