@@ -22,7 +22,7 @@ Observer exceptions and rejected promises report bus.subscriber and cannot escap
 
 Inside the retained tail, an identical occurrence ID plus identical full JSON is bus.duplicate (no delivery); conflicting reuse is bus.conflict. Outside that finite window the contiguous source high-water sequence rejects old occurrences with bus.sequence. UUID reuse with a newer sequence outside the retained window cannot be detected forever with bounded memory: producers must never reuse IDs and remote sinks maintain their own retention/idempotency policy. Out-of-order/gapped events reject locally. A remote aggregator can archive/reorder multiple streams under an independently declared policy.
 
-Local live delivery is one callback attempt per admitted task to each captured active subscription; intentional replay is another observation. Unsubscribe, disposal or process failure can interrupt delivery. This is neither durable nor exactly-once remote delivery. Remote retries, reconnect ordering, consent, redaction, persistence and idempotent export remain events#3.
+Local live delivery is one callback attempt per admitted task to each captured active subscription; intentional replay is another observation. Unsubscribe, disposal or process failure can interrupt delivery. This is neither durable nor exactly-once remote delivery. The optional consent-aware projection, bounded retry queue and idempotency seam are in [telemetry export v1](telemetry-v1.md); durable persistence, reconnect ordering and remote idempotency enforcement remain host-owned.
 
 ## Exact emission points for engine integration
 

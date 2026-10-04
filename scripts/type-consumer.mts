@@ -11,6 +11,7 @@ const invalid:EventPayloads['interactive-project/code.executed']={...payload,sou
 void invalid;void observe;void eventTypes;void validateEvent;
 
 import {createEventBus,type Frozen} from '@interactive-project/events/bus';
+import {createTelemetryExporter,type TelemetrySink} from '@interactive-project/events/telemetry';
 const bus=createEventBus({activityId:'fixture',sessionId:'fixture',sourceId:'fixture',validate:()=>({valid:true})});
 bus.subscribe(event=>{
  if(event.type==='interactive-project/activity.started'){
@@ -20,3 +21,8 @@ bus.subscribe(event=>{
  }
 });
 const frozen:Frozen<ActivityEvent>|undefined=undefined;void frozen;
+const sink:TelemetrySink={id:'example',write:(record,context)=>{const key:string=record.idempotencyKey;context.signal.onCancel(()=>{});void key;}};
+const telemetry=createTelemetryExporter({validate:validateEvent,consent:false,sinks:[sink]});
+const eventForTelemetry=undefined as unknown as ActivityEvent;
+const telemetryResult=telemetry.track(eventForTelemetry);if(!telemetryResult.accepted){const code:string=telemetryResult.code;void code;}
+void telemetry.flush();telemetry.dispose();

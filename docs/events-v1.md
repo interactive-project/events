@@ -35,7 +35,7 @@ Wire names use the interactive-project/ namespace; the familiar activity.created
 
 The code, diagram, whiteboard and simulation names require the matching activityType. Domain-local reference IDs are bounded nonempty strings; UUID occurrence/session/source/attempt/action/execution identity remains separate. Failed messages are public, safe static descriptions, never native stack traces or credentials. A schema cannot prove message privacy; the host/producer must enforce that policy.
 
-This issue defines when the semantic observation exists. Detailed local subscribe/unsubscribe, buffering, replay, reentrancy, failure isolation and exact multi-event emission ordering are implemented by events#2 and Core transition issues. Remote delivery, consent/redaction, sinks and retry retention remain events#3. Nothing in this envelope establishes exactly-once delivery. Retried export retains id, sourceId, sequence, timestamp and payload; creating a different id for a retry misrepresents an occurrence.
+This issue defines when the semantic observation exists. Detailed local subscribe/unsubscribe, buffering, replay, reentrancy, failure isolation and exact multi-event emission ordering are implemented by events#2 and Core transition issues. events#3 adds an optional consent-aware, redacted export boundary; durable network delivery, consent UX, persistent retry retention and remote reconciliation remain host-owned. Nothing in this envelope establishes exactly-once delivery. Retried export retains id, sourceId, sequence, timestamp and payload; creating a different id for a retry misrepresents an occurrence. See [telemetry export v1](telemetry-v1.md).
 
 ## Extensions, evolution and compatibility
 
